@@ -5,18 +5,25 @@ import 'package:flutter/material.dart';
 abstract class BaseStatefulWidget<T> extends StatefulWidget {
   String getTitle();
 
-  Widget body(AsyncSnapshot snapshot);
+  Widget body(T data);
 
-  Future future();
+  Future<T> future();
 
   @override
-  State<StatefulWidget> createState() => BaseState(getTitle());
+  State<StatefulWidget> createState() => BaseState<T>(getTitle());
 }
 
-class BaseState extends State<BaseStatefulWidget> {
+class BaseState<T> extends State<BaseStatefulWidget> {
   final String title;
+  Future<T> future;
 
   BaseState(this.title);
+
+  @override
+  void initState() {
+    super.initState();
+    future = widget.future();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +32,17 @@ class BaseState extends State<BaseStatefulWidget> {
         title: Text(title),
       ),
       body: FutureBuilder(
-        future: widget.future(),
+        future: future,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return snapshot.connectionState == ConnectionState.done
               ? snapshot.hasData
-                  ? widget.body(snapshot)
+                  ? widget.body(snapshot.data)
                   : InkWell(
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Text("Failed to connect ! Tap to retry !!"),
-                      ),
-                      onTap: () => setState(() {}),
+                      child: Center(
+                          child: Text("Failed to connect ! Tap to retry !!")),
+                      onTap: () => setState(() {
+                        future = widget.future();
+                      }),
                     )
               : Center(child: CircularProgressIndicator());
         },
