@@ -2,20 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-abstract class BaseStatefulWidget<T> extends StatefulWidget {
+abstract class BaseStatefulWidget extends StatefulWidget {
   String getTitle();
 
-  Widget body(T data);
+  Widget body(dynamic data);
 
-  Future<T> future();
+  Future<dynamic> future();
 
   @override
-  State<StatefulWidget> createState() => BaseState<T>(getTitle());
+  State<StatefulWidget> createState() => BaseState(getTitle());
 }
 
-class BaseState<T> extends State<BaseStatefulWidget> {
+class BaseState extends State<BaseStatefulWidget> {
   final String title;
-  Future<T> future;
+  late Future<dynamic> future;
 
   BaseState(this.title);
 
@@ -28,9 +28,7 @@ class BaseState<T> extends State<BaseStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(title: Text(title)),
       body: FutureBuilder(
         future: future,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -39,10 +37,9 @@ class BaseState<T> extends State<BaseStatefulWidget> {
                   ? widget.body(snapshot.data)
                   : InkWell(
                       child: Center(
-                          child: Text("Failed to connect ! Tap to retry !!")),
-                      onTap: () => setState(() {
-                        future = widget.future();
-                      }),
+                        child: Text("Failed to connect ! Tap to retry !!"),
+                      ),
+                      onTap: () => setState(() => future = widget.future()),
                     )
               : Center(child: CircularProgressIndicator());
         },
