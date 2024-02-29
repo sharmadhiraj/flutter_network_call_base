@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_network_call_base/base.dart';
-import 'package:flutter_network_call_base/network.dart';
-import 'package:flutter_network_call_base/user.dart';
-import 'package:flutter_network_call_base/user_detail.dart';
+import 'package:flutter_network_call_base/models/user.dart';
+import 'package:flutter_network_call_base/screens/user_detail.dart';
+import 'package:flutter_network_call_base/util/base.dart';
+import 'package:flutter_network_call_base/util/network.dart';
 
 class UserListScreen extends BaseStatefulWidget {
   @override

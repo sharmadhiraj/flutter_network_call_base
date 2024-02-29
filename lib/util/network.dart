@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_network_call_base/user.dart';
+import 'package:flutter_network_call_base/models/user.dart';
 import 'package:http/http.dart' as http;
 
 const String BASE_URL = "https://reqres.in/api/";

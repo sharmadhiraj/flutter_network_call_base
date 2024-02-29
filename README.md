@@ -1,12 +1,15 @@
-## Reusable stateful widget for network call with progress & retry 
+## Reusable Stateful Widget for Network Calls with Progress & Retry
 
-Base StatefulWidget Setup to overcome repetitive boilerplate code in every screen with network call.
+This project provides a base StatefulWidget setup to streamline repetitive boilerplate code
+typically encountered in every screen with network calls.
 
+#### Getting Started
 
-#### Getting started
-- Copy <a href="https://github.com/sharmadhiraj/flutter_network_call_base/blob/master/lib/base.dart" target="_blank">base.dart</a> to your project.
-- Extend your StatefulWidget by BaseStatefulWidget<T>. T here is data type that is returned by Future.
-- Implement methods *getTitle(),body<T>(T data), future<T>()*.
-  
+- Copy
+  the [base.dart](https://github.com/sharmadhiraj/flutter_network_call_base/blob/master/lib/base.dart)
+  file to your project.
+- Extend your StatefulWidget by `BaseStatefulWidget<T>`. Here, `T` represents the data type returned
+  by the Future.
+- Implement the following methods: `getTitle()`, `body<T>(T data)`, `future<T>()`.
 
-API used : https://reqres.in/
+API used: [https://reqres.in/](https://reqres.in/)
